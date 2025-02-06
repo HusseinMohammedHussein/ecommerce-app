@@ -24,23 +24,26 @@ class ProductItemDesktop extends StatelessWidget {
         context.pushNamed(AppStrings.productDetailsScreenPath, extra: product);
       },
       child: Container(
-        margin: EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 7),
-        padding: EdgeInsetsDirectional.all(20),
+        margin:
+            const EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 7),
+        padding: const EdgeInsetsDirectional.all(20),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             border: Border.all(color: Colors.black26)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(child: CachedNetworkImage(
-              imageUrl: '${product.image}',
-              height: 230,
-              width: sizeWidth,
-              fit: BoxFit.contain,
-            )),
-            SizedBox(
+            Flexible(
+              child: CachedNetworkImage(
+                imageUrl: '${product.image}',
+                height: 230,
+                width: sizeWidth,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(
               height: 30,
             ),
             AutoSizeText(
@@ -49,19 +52,19 @@ class ProductItemDesktop extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxFontSize: 20,
               minFontSize: 16,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
                   fontSize: 20),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             AutoSizeText(
               '${product.price} LE',
               maxFontSize: 22,
               minFontSize: 18,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,

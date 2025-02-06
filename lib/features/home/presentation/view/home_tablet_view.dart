@@ -1,11 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:e_commerce_task/core/di/dependency_injection.dart';
-import 'package:e_commerce_task/core/routes/app_routes.dart';
 import 'package:e_commerce_task/core/utils/custom_widgets/no_data_widget.dart';
-import 'package:e_commerce_task/core/utils/custom_widgets/base_scaffold.dart';
-import 'package:e_commerce_task/features/home/presentation/cubit/product_state.dart';
+import 'package:e_commerce_task/features/home/presentation/cubit/products_state.dart';
 import 'package:e_commerce_task/features/home/presentation/cubit/products_cubit.dart';
-import 'package:e_commerce_task/features/home/presentation/widgets/product_item_mobile.dart';
 import 'package:e_commerce_task/features/home/presentation/widgets/product_item_tablet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,17 +13,17 @@ class HomeTabletView extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BlocBuilder<ProductCubit, ProductState>(
+        BlocBuilder<ProductsCubit, ProductsState>(
           builder: (ctx, state) {
-            if (state is ProductLoadingState) {
+            if (state is ProductsLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is ProductSuccessState) {
+            if (state is ProductsSuccessState) {
               return Flexible(
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     childAspectRatio: 2/2

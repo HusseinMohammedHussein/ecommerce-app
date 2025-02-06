@@ -24,10 +24,10 @@ class ProductItemTablet extends StatelessWidget {
         context.pushNamed(AppStrings.productDetailsScreenPath, extra: product);
       },
       child: Container(
-        margin: EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 7),
-        padding: EdgeInsetsDirectional.all(20),
+        margin: const EdgeInsetsDirectional.symmetric(horizontal: 15, vertical: 7),
+        padding: const EdgeInsetsDirectional.all(20),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
             border: Border.all(color: Colors.black26)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -56,18 +56,18 @@ class ProductItemTablet extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxFontSize: 22,
                         minFontSize: 14,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 22),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     AutoSizeText(
                       '${product.price} LE',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,

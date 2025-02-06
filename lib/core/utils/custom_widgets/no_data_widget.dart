@@ -11,12 +11,12 @@ class NoDataWidget extends StatelessWidget {
       child: Container(
         width: sizeWidth * 0.5,
         alignment: Alignment.center,
-        padding: EdgeInsetsDirectional.all(10),
+        padding: const EdgeInsetsDirectional.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.black26, width: 1),
         ),
-        child: AutoSizeText(
+        child: const AutoSizeText(
           'NO DATA FOR NOW!',
           style: TextStyle(
             color: Colors.redAccent,

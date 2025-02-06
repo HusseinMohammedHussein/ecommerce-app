@@ -14,8 +14,9 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+      isHomeScreen: true,
       body: BlocProvider(
-        create: (ctx) => sl<ProductCubit>()..getProducts(),
+        create: (ctx) => sl<ProductsCubit>()..getProducts(),
         child: const ResponsiveLayout(
           mobileView: HomeMobileView(),
           tabletView: HomeTabletView(),
