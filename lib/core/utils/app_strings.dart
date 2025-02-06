@@ -10,9 +10,17 @@ abstract class AppStrings {
   static const String productDetailsTabletScreenPath = '/product_details_tab';
   static const String productDetailsDesktopScreenPath = '/product_details_des';
 
+  static const String favoriteScreenPath = '/favorite_view';
+  static const String favoriteMobileScreenPath = '/favorite_mob';
+  static const String favoriteTabletScreenPath = '/favorite_tab';
+  static const String favoriteDesktopScreenPath = '/favorite_des';
+
   // API endpoints
   static const String baseURL = 'https://fakestoreapi.com/';
   static const String products = 'products';
+
+  // Storage Keys
+  static const String favoritesKey = 'favorites';
 
   // Error Message
   static const errorNoInternetConnection = "Error: no internet connection";

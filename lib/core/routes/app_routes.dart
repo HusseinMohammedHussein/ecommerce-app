@@ -1,17 +1,18 @@
-import 'package:e_commerce_task/core/di/dependency_injection.dart';
 import 'package:e_commerce_task/core/helper/route_helper.dart';
 import 'package:e_commerce_task/core/utils/app_strings.dart';
+import 'package:e_commerce_task/features/favorites/presentation/views/favorites_desktop_view.dart';
+import 'package:e_commerce_task/features/favorites/presentation/views/favorites_mobile_view.dart';
+import 'package:e_commerce_task/features/favorites/presentation/views/favorites_tablet_view.dart';
+import 'package:e_commerce_task/features/favorites/presentation/views/favorites_view.dart';
 import 'package:e_commerce_task/features/home/data/models/product_model.dart';
-import 'package:e_commerce_task/features/home/presentation/cubit/products_cubit.dart';
 import 'package:e_commerce_task/features/home/presentation/view/home_desktop_view.dart';
 import 'package:e_commerce_task/features/home/presentation/view/home_mobile_view.dart';
 import 'package:e_commerce_task/features/home/presentation/view/home_tablet_view.dart';
 import 'package:e_commerce_task/features/home/presentation/view/home_view.dart';
 import 'package:e_commerce_task/features/product_details/presentation/views/product_details_view.dart';
-import 'package:e_commerce_task/features/product_details/presentation/widgets/product_details_mobile_widget.dart';
-import 'package:e_commerce_task/features/product_details/presentation/widgets/product_details_tablet_widget.dart';
+import 'package:e_commerce_task/features/product_details/presentation/widgets/custom_details_small_widget.dart';
+import 'package:e_commerce_task/features/product_details/presentation/widgets/custom_details_big_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 final scaffoldKey = RouteHelper.routeHelper.scaffoldKey;
@@ -60,7 +61,7 @@ final routes = GoRouter(
           name: AppStrings.productDetailsMobileScreenPath,
           builder: (ctx, state) {
             final product = state.extra as ProductModel;
-            return ProductDetailsMobileWidget(product: product);
+            return CustomDetailsSmallWidget(product: product);
           },
         ),
         GoRoute(
@@ -68,13 +69,35 @@ final routes = GoRouter(
           name: AppStrings.productDetailsTabletScreenPath,
           builder: (ctx, state) {
             final product = state.extra as ProductModel;
-            return ProductDetailsTabletWidget(product: product);
+            return CustomDetailsBigWidget(product: product);
           },
         ),
         GoRoute(
           path: AppStrings.productDetailsDesktopScreenPath,
           name: AppStrings.productDetailsDesktopScreenPath,
           builder: (ctx, state) => const HomeDesktopView(),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: AppStrings.favoriteScreenPath,
+      name: AppStrings.favoriteScreenPath,
+      builder: (ctx, state) => const FavoritesView(),
+      routes: [
+        GoRoute(
+          path: AppStrings.favoriteMobileScreenPath,
+          name: AppStrings.favoriteMobileScreenPath,
+          builder: (ctx, state) => const FavoritesMobileView(),
+        ),
+        GoRoute(
+          path: AppStrings.favoriteTabletScreenPath,
+          name: AppStrings.favoriteTabletScreenPath,
+          builder: (ctx, state) => const FavoritesTabletView(),
+        ),
+        GoRoute(
+          path: AppStrings.favoriteDesktopScreenPath,
+          name: AppStrings.favoriteDesktopScreenPath,
+          builder: (ctx, state) => const FavoritesDesktopView(),
         ),
       ],
     ),

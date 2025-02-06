@@ -1,16 +1,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:e_commerce_task/core/routes/app_routes.dart';
+import 'package:e_commerce_task/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class BaseScaffold extends StatelessWidget {
   final Widget body;
   final String? title;
+  final bool? isHomeScreen;
 
   const BaseScaffold({
     super.key,
     required this.body,
     this.title,
+    this.isHomeScreen = false,
   });
 
   @override
@@ -23,7 +25,7 @@ class BaseScaffold extends StatelessWidget {
               backgroundColor: Colors.white,
               title: AutoSizeText(
                 title!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontSize: 20,
@@ -33,11 +35,31 @@ class BaseScaffold extends StatelessWidget {
                 onPressed: () {
                   context.pop();
                 },
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
               ),
             )
-          : null,
+          : AppBar(),
       body: body,
+      floatingActionButton: isHomeScreen!
+          ? GestureDetector(
+              onTap: () {
+                context.pushNamed(AppStrings.favoriteScreenPath);
+              },
+              child: Container(
+                padding: const EdgeInsetsDirectional.all(20),
+                // alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: const AutoSizeText(
+                  'My Favorites',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18),
+                ),
+              ))
+          : const Offstage(),
     );
   }
 }
