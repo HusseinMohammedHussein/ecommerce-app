@@ -1,3 +1,4 @@
+import 'package:e_commerce_task/core/di/dependency_injection.dart';
 import 'package:e_commerce_task/core/utils/app_strings.dart';
 import 'package:e_commerce_task/core/utils/custom_widgets/no_data_widget.dart';
 import 'package:e_commerce_task/features/favorites/presentation/cubit/local_favorite_cubit.dart';
@@ -14,10 +15,10 @@ class FavoritesDesktopView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BlocBuilder<LocalFavoritesCubit, LocalFavoritesState>(
-          bloc: LocalFavoritesCubit()..getFavoritesSaved(AppStrings.favoritesKey),
+          bloc: sl<LocalFavoritesCubit>()..getFavoritesSaved(AppStrings.favoritesKey),
           builder: (ctx, state) {
             if (state is LocalFavoritesSuccessState) {
-              if (state.favoriteProducts.isEmpty) {
+              if (state.favoriteProducts!.isEmpty) {
                 return const NoDataWidget();
               }
               return Flexible(
@@ -26,9 +27,9 @@ class FavoritesDesktopView extends StatelessWidget {
                       crossAxisCount: 4,
                       mainAxisSpacing: 15,
                       childAspectRatio: 4 / 4),
-                  itemCount: state.favoriteProducts.length,
+                  itemCount: state.favoriteProducts!.length,
                   itemBuilder: (ctx, index) {
-                    final product = state.favoriteProducts[index];
+                    final product = state.favoriteProducts![index];
                     return CustomFavoriteItemBigWidget(
                       product: product,
                     );

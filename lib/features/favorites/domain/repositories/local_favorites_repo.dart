@@ -6,4 +6,6 @@ abstract class LocalFavoritesRepo {
   Future<void> saveFavoriteProduct(String key, ProductModel product);
 
   Future<void> removeFavoriteProduct(String key, ProductModel product);
+
+  Future<bool> isFavoriteProduct(String key, ProductModel productModel);
 }

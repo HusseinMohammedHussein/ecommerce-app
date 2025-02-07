@@ -5,7 +5,7 @@ sealed class LocalFavoritesState {}
 class LocalFavoritesLoadingState extends LocalFavoritesState {}
 
 class LocalFavoritesSuccessState extends LocalFavoritesState {
-  List<ProductModel> favoriteProducts;
+  List<ProductModel>? favoriteProducts;
 
   LocalFavoritesSuccessState({
     required this.favoriteProducts,
@@ -15,3 +15,9 @@ class LocalFavoritesSuccessState extends LocalFavoritesState {
 class LocalSaveFavoritesSuccessState extends LocalFavoritesState {}
 
 class LocalRemoveFavoritesSuccessState extends LocalFavoritesState {}
+
+class LocalIsFavoritesSuccessState extends LocalFavoritesState {
+  bool isFavorite;
+
+  LocalIsFavoritesSuccessState(this.isFavorite);
+}

@@ -1,3 +1,4 @@
+import 'package:e_commerce_task/core/di/dependency_injection.dart';
 import 'package:e_commerce_task/core/utils/custom_widgets/base_scaffold.dart';
 import 'package:e_commerce_task/core/utils/custom_widgets/responsive_layout.dart';
 import 'package:e_commerce_task/features/favorites/presentation/cubit/local_favorite_cubit.dart';
@@ -14,7 +15,7 @@ class FavoritesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseScaffold(
         body: BlocProvider(
-      create: (_) => LocalFavoritesCubit(),
+      create: (_) => sl<LocalFavoritesCubit>(),
       child: const ResponsiveLayout(
         mobileView: FavoritesMobileView(),
         tabletView: FavoritesTabletView(),

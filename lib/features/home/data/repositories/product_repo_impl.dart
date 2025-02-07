@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:e_commerce_task/core/database/dio_consumer.dart';
 import 'package:e_commerce_task/core/error/failure.dart';
-import 'package:e_commerce_task/core/network/dio_consumer.dart';
 import 'package:e_commerce_task/core/utils/app_strings.dart';
 import 'package:e_commerce_task/features/home/data/models/product_model.dart';
 import 'package:e_commerce_task/features/home/domain/repositories/product_repo.dart';
