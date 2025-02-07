@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce_task/core/di/dependency_injection.dart';
 import 'package:e_commerce_task/core/routes/app_routes.dart';
 import 'package:e_commerce_task/core/utils/app_strings.dart';
 import 'package:e_commerce_task/features/favorites/presentation/cubit/local_favorite_cubit.dart';
@@ -25,26 +26,9 @@ class CustomDetailsSmallWidget extends StatefulWidget {
 class _CustomDetailsSmallWidgetState extends State<CustomDetailsSmallWidget> {
   ValueNotifier<bool> isFavorite = ValueNotifier<bool>(false);
 
-  LocalFavoritesCubit? favoriteCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    isFavoriteCubit();
-  }
-
-  Future<bool> isFavoriteCubit() async {
-    return isFavorite.value = await favoriteCubit!.isFavorite(
-      AppStrings.favoritesKey,
-      widget.product.id.toString(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    favoriteCubit = BlocProvider.of<LocalFavoritesCubit>(context);
-    log('isFavorite.value:: ${isFavorite.value}');
-    log('isFavoriteCubit:: $isFavoriteCubit');
+    final favoriteCubit = BlocProvider.of<LocalFavoritesCubit>(context);
     return SingleChildScrollView(
       padding: const EdgeInsetsDirectional.all(20),
       child: Column(
@@ -61,36 +45,55 @@ class _CustomDetailsSmallWidgetState extends State<CustomDetailsSmallWidget> {
               PositionedDirectional(
                 end: 20,
                 bottom: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    log('message');
-                    setState(() {
-                      isFavorite.value = !isFavorite.value;
-                    });
-                    favoriteCubit?.saveProducts(
-                        AppStrings.favoritesKey, widget.product);
-                  },
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.all(10),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.red),
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.white,
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 2,
-                          )
-                        ]),
-                    child: ValueListenableBuilder(
-                      valueListenable: isFavorite,
-                      builder: (_, value, w) => Icon(
-                        value ? Icons.favorite : Icons.favorite_border,
-                        color: value ? Colors.red : Colors.black,
-                        size: 20,
-                      ),
+                child: BlocConsumer<LocalFavoritesCubit, LocalFavoritesState>(
+                  bloc: sl<LocalFavoritesCubit>()
+                    ..isFavorite(
+                      AppStrings.favoritesKey,
+                      widget.product,
                     ),
-                  ),
+                  listener: (_, Object? state) {
+                    if (state is LocalIsFavoritesSuccessState) {
+                      log('state.isFavorite:: ${state.isFavorite}');
+                      isFavorite.value = state.isFavorite;
+                    }
+                  },
+                  builder: (_, state) {
+                    return GestureDetector(
+                      onTap: () async {
+                        if (isFavorite.value) {
+                          favoriteCubit?.removeProducts(
+                              AppStrings.favoritesKey, widget.product);
+                        } else {
+                          favoriteCubit?.saveProducts(
+                              AppStrings.favoritesKey, widget.product);
+                        }
+                        setState(() {
+                          isFavorite.value = !isFavorite.value;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsetsDirectional.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.red),
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 2,
+                              )
+                            ]),
+                        child: ValueListenableBuilder(
+                          valueListenable: isFavorite,
+                          builder: (_, value, w) => Icon(
+                            value ? Icons.favorite : Icons.favorite_border,
+                            color: value ? Colors.red : Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
