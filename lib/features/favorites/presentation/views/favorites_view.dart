@@ -14,6 +14,7 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+      title: 'My Favorites',
         body: BlocProvider(
       create: (_) => sl<LocalFavoritesCubit>(),
       child: const ResponsiveLayout(
