@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:e_commerce_task/core/database/local/cache_helper.dart';
-import 'package:e_commerce_task/core/di/dependency_injection.dart';
 import 'package:e_commerce_task/features/favorites/domain/repositories/local_favorites_repo.dart';
 import 'package:e_commerce_task/features/home/data/models/product_model.dart';
 

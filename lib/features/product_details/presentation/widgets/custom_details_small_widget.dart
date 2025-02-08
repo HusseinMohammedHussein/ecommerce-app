@@ -61,10 +61,10 @@ class _CustomDetailsSmallWidgetState extends State<CustomDetailsSmallWidget> {
                     return GestureDetector(
                       onTap: () async {
                         if (isFavorite.value) {
-                          favoriteCubit?.removeProducts(
+                          favoriteCubit.removeProducts(
                               AppStrings.favoritesKey, widget.product);
                         } else {
-                          favoriteCubit?.saveProducts(
+                          favoriteCubit.saveProducts(
                               AppStrings.favoritesKey, widget.product);
                         }
                         setState(() {
